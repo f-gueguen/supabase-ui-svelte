@@ -7,6 +7,7 @@
   export let supabaseClient
   export let view
   export let setView
+  export let redirectTo
 
   let error = '', message = '', loading = false, email = '', password = ''
 
@@ -18,13 +19,13 @@
     if (view == 'sign_up') {
       const { error: signUpError } = await supabaseClient.auth.signUp({
         email, password
-      })
+      }, { redirectTo })
 
       if (signUpError) error = signUpError.message
     } else if (view == 'sign_in') {
       const { error: signInError } = await supabaseClient.auth.signIn({
         email, password
-      })
+      }, { redirectTo })
 
       if (signInError) error = signInError.message
     }
